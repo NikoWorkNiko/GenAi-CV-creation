@@ -35,6 +35,9 @@ Open [config.yaml](GenAi_Django/config/config.yaml) and insert your API key in t
 ### 5. Run app in terminal
 
 Apply database migrations
+```bash
+python manage.py makemigrations
+```
 
 ```bash
 python manage.py migrate

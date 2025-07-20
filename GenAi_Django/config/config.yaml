@@ -1,0 +1,8 @@
+# ToDo: add your API-Key here
+api_key: ""
+provider: gemini
+model: "gemini-1.5-flash"
+temperature: 1
+top-p: 1
+presence_penalty: 0
+frequency_penalty: 0

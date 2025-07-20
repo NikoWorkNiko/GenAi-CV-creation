@@ -1,0 +1,114 @@
+{
+  "professional_info": {
+    "education": [
+      {
+        "institution": "string",
+        "degree": "string",
+        "field_of_study": "string",
+        "start_date": "string",
+        "end_date": "string",
+        "grade": "string/nil",
+        "description": "string/nil"
+      }
+    ],
+
+    "work_experience": [
+      {
+        "institution": {
+          "name": "string",
+          "department": "string/nil",
+          "location": "string"
+        },
+        "position": {
+          "name": "string",
+          "description": "string/nil"
+        },
+        "start_date": "string",
+        "end_date": "string",
+        "projects": [
+          {
+            "name": "string",
+            "description": "string/nil"
+          }
+        ],
+        "achievements": [
+          {
+            "name": "string",
+            "description": "string/nil"
+          }
+        ]
+      }
+    ],
+
+    "engagement": [
+      {
+        "organization": "string",
+        "role": "string",
+        "start_date": "string",
+        "end_date": "string",
+        "description": "string/nil"
+      }
+    ],
+
+    "skills": {
+      "technical_skills": ["string"],
+      "soft_skills": ["string"],
+      "languages": [
+        {
+          "language": "string",
+          "proficiency": "string"
+        }
+      ]
+    },
+
+    "awards": [
+      {
+        "title": "string",
+        "issuer": "string",
+        "date": "string",
+        "description": "string/nil"
+      }
+    ],
+
+    "job_requirements": {
+      "required_education": [
+        {
+          "degree": "string",
+          "field_of_study": "string",
+          "minimum_level": "string",
+          "preferred_institutions": ["string/nil"]
+        }
+      ],
+      "required_work_experience": [
+        {
+          "position": "string",
+          "industry": "string",
+          "years_required": "number",
+          "responsibilities": ["string"]
+        }
+      ],
+      "required_hard_skills": [
+        {
+          "skill": "string",
+          "proficiency_level": "string",
+          "certification_required": "boolean"
+        }
+      ],
+      "job_specific_values_soft_skills": {
+        "soft_skills": ["string"],
+        "job_values": ["string"]
+      },
+      "company_specific_values_character_values": {
+        "core_company_values": ["string"],
+        "desired_character_traits": ["string"]
+      },
+      "misc": {
+        "travel_required": "boolean",
+        "relocation_support": "boolean",
+        "working_hours": "string/nil",
+        "contract_type": "string/nil",
+        "additional_notes": "string/nil"
+      }
+    }
+  }
+}

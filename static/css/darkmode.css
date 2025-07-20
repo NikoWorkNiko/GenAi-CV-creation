@@ -1,0 +1,126 @@
+/* Hauptfarbe und Text */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #e2e2e2;
+}
+
+/* Navbar */
+body.dark-mode .navbar {
+  background-color: #2c2c2c !important;
+  color: #f1f1f1;
+}
+
+body.dark-mode .navbar .nav-link {
+  color: #e2e2e2 !important;
+}
+
+body.dark-mode .navbar .nav-link:hover {
+  color: #ffffff !important;
+}
+
+/* Footer */
+body.dark-mode footer {
+  background-color: #2c2c2c;
+  color: #cfcfcf;
+}
+
+/* Buttons */
+body.dark-mode .btn {
+  border-color: #ccc;
+  color: #e2e2e2;
+  background-color: transparent;
+}
+
+body.dark-mode .btn:hover {
+  background-color: #444;
+  color: #fff;
+}
+
+/* Cards & Boxen */
+body.dark-mode .card,
+body.dark-mode .bg-light,
+body.dark-mode .shadow-sm {
+  background-color: #2a2a2a !important;
+  color: #e2e2e2 !important;
+}
+
+/* Überschriften */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4 {
+  color: #ffffff;
+}
+
+/* Links */
+body.dark-mode a {
+  color: #91c9f7;
+}
+body.dark-mode a:hover {
+  color: #c0e7ff;
+}
+
+/* Blockquotes */
+body.dark-mode blockquote {
+  border-left: 4px solid #888;
+  color: #ccc;
+}
+
+/* Inputfelder */
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background-color: #2c2c2c;
+  color: #f0f0f0;
+  border: 1px solid #555;
+}
+
+/* Placeholder */
+body.dark-mode input::placeholder {
+  color: #aaa;
+}
+
+/* Stepper-Textfarbe je nach Modus */
+.step-link {
+  color: #212529; /* Bootstrap text-dark */
+}
+
+body.dark-mode .step-link {
+  color: #e2e2e2;
+}
+
+/* Form Labels und Zusatztexte */
+body.dark-mode .form-label,
+body.dark-mode .text-muted,
+body.dark-mode .text-secondary,
+body.dark-mode .form-text {
+  color: #ccc !important;
+}
+
+/* Input-Gruppe Symbole */
+body.dark-mode .input-group-text {
+  background-color: #2c2c2c;
+  color: #f0f0f0;
+  border: 1px solid #555;
+}
+
+/* Tabellen */
+body.dark-mode table,
+body.dark-mode th,
+body.dark-mode td {
+  background-color: #2a2a2a;
+  color: #e2e2e2;
+  border-color: #444;
+}
+
+/* List Items */
+body.dark-mode .list-group-item {
+  background-color: #2a2a2a;
+  color: #e2e2e2;
+  border-color: #444;
+}
+
+body.dark-mode .bg-light {
+  background-color: #2a2a2a !important;
+  color: #e2e2e2 !important;
+}

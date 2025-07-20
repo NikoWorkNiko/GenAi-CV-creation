@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CV-Creator - Step 5{% endblock %}
+
+{% block individual_css %}
+    <link rel="stylesheet" href="{% static 'css/step5.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include 'stepper.html' %}
+
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            <strong>Error:</strong> {{ error }}
+        </div>
+    {% else %}
+        {% if pdf_filename %}
+            <div class="alert alert-success text-center">
+                <strong>Your resume was successfully created!</strong><br>
+                You can view it below and download it.
+            </div>
+            <div class="mt-4 d-flex justify-content-center">
+                <div class="row">
+                  <canvas class="col-12 col-md-6 text-center" id="pdf-canvas"></canvas>
+                </div>
+                <script>
+                  window.pdfUrl = "{{ MEDIA_URL }}generated_cvs/{{ pdf_filename }}";
+                </script>
+            </div>
+
+            <div class="m-3 d-flex justify-content-center">
+                <a href="{{ MEDIA_URL }}generated_cvs/{{ pdf_filename }}" class="btn btn-success" download>
+                    Download PDF
+                </a>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                Click the button below to generate your resume based on your information and the comparison with the job posting.
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Generate Resume</button>
+            </form>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="{% static 'js/pdf_preview.js' %}"></script>
+{% endblock %}

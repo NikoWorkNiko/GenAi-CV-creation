@@ -1,0 +1,53 @@
+{
+  "job_posting_information": {
+    "company": "",
+    "required_education": [
+      {
+        "degree": "",
+        "field_of_study": "",
+        "minimum_level": "",
+        "preferred_institutions": [
+          ""
+        ]
+      }
+    ],
+    "required_work_experience": [
+      {
+        "position": "",
+        "industry": "",
+        "years_required": "",
+        "responsibilities": []
+      }
+    ],
+    "required_hard_skills": [
+      {
+        "skill": "",
+        "proficiency_level": "",
+        "certification_required": false
+      },
+      {
+        "skill": "",
+        "proficiency_level": "",
+        "certification_required": false
+      },
+      {
+        "skill": "",
+        "proficiency_level": "",
+        "certification_required": false
+      }
+    ],
+    "job_specific_soft_skills": [],
+    "job_specific_values": [],
+    "company_specific_values": [],
+    "desired_character_traits": [],
+    "misc": {
+      "contract_type": "",
+      "working_hours": "",
+      "location": "",
+      "travel_required": false,
+      "relocation_support": false,
+      "language_requirements": [],
+      "additional_notes": ""
+    }
+  }
+}

@@ -1,0 +1,171 @@
+<!-- job posting information -->
+{% extends 'base.html' %}
+{% block title %}Step 3b – Edit Job Posting Info{% endblock %}
+
+{% block content %}
+  {% include 'stepper.html' %}
+    {% include 'stepper_step3.html' with step3_substep="step3b" %}
+  <div class="container mt-5">
+    <h2>Edit Job Posting Information</h2>
+
+    {% if summary %}
+      <div class="alert alert-info mt-3">
+        <strong>Job Summary:</strong><br>
+        {{ summary|linebreaksbr }}
+      </div>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label text-end">Company</label>
+        <div class="col-sm-9">
+          <input type="text" name="company" class="form-control" value="{{ job.company|default:'' }}">
+        </div>
+      </div>
+
+      <h4>Required Education</h4>
+      {% for e in job.required_education %}
+        <div class="border p-3 mb-2">
+          <div class="row mb-2">
+            <label class="col-sm-3 col-form-label text-end">Degree</label>
+            <div class="col-sm-9">
+              <input type="text" name="edu_{{ forloop.counter0 }}_degree" class="form-control" value="{{ e.degree }}">
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label class="col-sm-3 col-form-label text-end">Field of Study</label>
+            <div class="col-sm-9">
+              <input type="text" name="edu_{{ forloop.counter0 }}_field" class="form-control" value="{{ e.field_of_study }}">
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label class="col-sm-3 col-form-label text-end">Minimum Level</label>
+            <div class="col-sm-9">
+              <input type="text" name="edu_{{ forloop.counter0 }}_level" class="form-control" value="{{ e.minimum_level }}">
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label class="col-sm-3 col-form-label text-end">Preferred Institutions</label>
+            <div class="col-sm-9">
+              <input type="text" name="edu_{{ forloop.counter0 }}_preferred" class="form-control" value="{{ e.preferred_institutions|join:", " }}">
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+      <h4>Required Work Experience</h4>
+      {% for w in job.required_work_experience %}
+        <div class="border p-3 mb-2">
+          <div class="row mb-2">
+            <label class="col-sm-3 col-form-label text-end">Position</label>
+            <div class="col-sm-9">
+              <input type="text" name="work_{{ forloop.counter0 }}_position" class="form-control" value="{{ w.position }}">
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label class="col-sm-3 col-form-label text-end">Industry</label>
+            <div class="col-sm-9">
+              <input type="text" name="work_{{ forloop.counter0 }}_industry" class="form-control" value="{{ w.industry }}">
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label class="col-sm-3 col-form-label text-end">Years Required</label>
+            <div class="col-sm-9">
+              <input type="text" name="work_{{ forloop.counter0 }}_years" class="form-control" value="{{ w.years_required }}">
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label class="col-sm-3 col-form-label text-end">Responsibilities</label>
+            <div class="col-sm-9">
+              <input type="text" name="work_{{ forloop.counter0 }}_responsibilities" class="form-control" value="{{ w.responsibilities|join:", " }}">
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+      <h4>Required Hard Skills</h4>
+      {% for s in job.required_hard_skills %}
+        <div class="border p-3 mb-2">
+          <div class="row mb-2">
+            <label class="col-sm-3 col-form-label text-end">Skill</label>
+            <div class="col-sm-9">
+              <input type="text" name="skill_{{ forloop.counter0 }}_name" class="form-control" value="{{ s.skill }}">
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label class="col-sm-3 col-form-label text-end">Proficiency Level</label>
+            <div class="col-sm-9">
+              <input type="text" name="skill_{{ forloop.counter0 }}_proficiency" class="form-control" value="{{ s.proficiency_level }}">
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-sm-3 text-end">Certification Required</div>
+            <div class="col-sm-9">
+              <input type="checkbox" name="skill_{{ forloop.counter0 }}_cert_required" {% if s.certification_required %}checked{% endif %}>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+      <h4>Other Fields</h4>
+      <div class="mb-3">
+        <label class="form-label">Job-Specific Soft Skills</label>
+        <input type="text" name="job_specific_soft_skills" class="form-control" value="{{ job.job_specific_soft_skills|join:", " }}">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Job-Specific Values</label>
+        <input type="text" name="job_specific_values" class="form-control" value="{{ job.job_specific_values|join:", " }}">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Company-Specific Values</label>
+        <input type="text" name="company_specific_values" class="form-control" value="{{ job.company_specific_values|join:", " }}">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Desired Character Traits</label>
+        <input type="text" name="desired_character_traits" class="form-control" value="{{ job.desired_character_traits|join:", " }}">
+      </div>
+
+      <h4>Misc</h4>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="checkbox" id="travel_required" name="travel_required" {% if job.misc.travel_required %}checked{% endif %}>
+        <label class="form-check-label" for="travel_required">Travel Required</label>
+      </div>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="checkbox" id="relocation_support" name="relocation_support" {% if job.misc.relocation_support %}checked{% endif %}>
+        <label class="form-check-label" for="relocation_support">Relocation Support</label>
+      </div>
+      <div class="row mb-2">
+        <label class="col-sm-3 col-form-label text-end">Working Hours</label>
+        <div class="col-sm-9">
+          <input type="text" name="working_hours" class="form-control" value="{{ job.misc.working_hours }}">
+        </div>
+      </div>
+      <div class="row mb-2">
+        <label class="col-sm-3 col-form-label text-end">Contract Type</label>
+        <div class="col-sm-9">
+          <input type="text" name="contract_type" class="form-control" value="{{ job.misc.contract_type }}">
+        </div>
+      </div>
+      <div class="row mb-2">
+        <label class="col-sm-3 col-form-label text-end">Location</label>
+        <div class="col-sm-9">
+          <input type="text" name="location" class="form-control" value="{{ job.misc.location }}">
+        </div>
+      </div>
+      <div class="row mb-2">
+        <label class="col-sm-3 col-form-label text-end">Language Requirements</label>
+        <div class="col-sm-9">
+          <input type="text" name="language_requirements" class="form-control" value="{{ job.misc.language_requirements|join:", " }}">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Additional Notes</label>
+        <textarea name="additional_notes" class="form-control">{{ job.misc.additional_notes }}</textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save & Continue</button>
+    </form>
+  </div>
+{% endblock %}

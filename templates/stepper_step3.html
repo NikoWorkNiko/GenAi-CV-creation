@@ -1,0 +1,43 @@
+<div class="container mt-3">
+  <div class="stepper-sub d-flex justify-content-between">
+
+    {% with step3_substep|default:"step3" as current %}
+
+    <!-- Step 1: Personal -->
+    <div class="step-sub {% if current == 'step3' %}active{% elif current != 'step3' %}completed{% endif %}">
+      <a href="{% url 'step3' %}" class="text-decoration-none">
+        1. Personal
+      </a>
+    </div>
+
+    <!-- Step 2: Education -->
+    <div class="step-sub {% if current == 'step3a_edu' %}active{% elif current == 'step3a_work' or current == 'step3a_other' or current == 'step3b' %}completed{% endif %}">
+      <a href="{% url 'step3a_edu' %}" class="text-decoration-none">
+        2. Education
+      </a>
+    </div>
+
+    <!-- Step 3: Work -->
+    <div class="step-sub {% if current == 'step3a_work' %}active{% elif current == 'step3a_other' or current == 'step3b'%}completed{% endif %}">
+      <a href="{% url 'step3a_work' %}" class="text-decoration-none">
+        3. Work
+      </a>
+    </div>
+
+    <!-- Step 4: Engagement & Skills -->
+    <div class="step-sub {% if current == 'step3a_other' %}active{% elif current == 'step3b' %}completed{% endif %}">
+      <a href="{% url 'step3a_other' %}" class="text-decoration-none">
+        4. Engagement & Skills
+      </a>
+    </div>
+
+    <!-- Step 5: Job -->
+    <div class="step-sub {% if current == 'step3b' %}active{% endif %}">
+      <a href="{% url 'step3b' %}" class="text-decoration-none">
+        5. Job
+      </a>
+    </div>
+
+    {% endwith %}
+  </div>
+</div>

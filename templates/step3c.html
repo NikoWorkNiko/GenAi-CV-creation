@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Step 3c – Edit Values & Traits{% endblock %}
+
+{% block content %}
+  {% include 'stepper.html' %}
+
+  <div class="container mt-5">
+    <h2>Edit Company-Related Values and Traits</h2>
+    <form method="post">
+      {% csrf_token %}
+
+      <!-- Job-Specific Values -->
+      <div class="mb-4">
+        <label class="form-label"><strong>Job-Specific Values</strong></label>
+        <textarea name="job_specific_values" class="form-control" rows="4">{{ job.job_specific_values|join:", " }}</textarea>
+        <div class="form-text">Separate multiple values with commas.</div>
+      </div>
+
+      <!-- Company-Specific Values -->
+      <div class="mb-4">
+        <label class="form-label"><strong>Company-Specific Values</strong></label>
+        <textarea name="company_specific_values" class="form-control" rows="4">{{ job.company_specific_values|join:", " }}</textarea>
+        <div class="form-text">Separate multiple values with commas.</div>
+      </div>
+
+      <!-- Desired Character Traits -->
+      <div class="mb-4">
+        <label class="form-label"><strong>Desired Character Traits</strong></label>
+        <textarea name="desired_character_traits" class="form-control" rows="4">{{ job.desired_character_traits|join:", " }}</textarea>
+        <div class="form-text">Separate multiple traits with commas.</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Save & Continue</button>
+    </form>
+  </div>
+{% endblock %}

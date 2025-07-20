@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CV-Creator – Step 1{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+    
+        {% include 'stepper.html' %}
+    
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Step 1: Upload Your CV</h2>
+                <p class="text-center text-muted">
+                    Upload your existing CV as <strong>PDF, DOCX or TXT</strong>. Our AI will extract your information to get you started faster.
+                </p>
+    
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+    
+                    <div class="mb-3">
+                        <div class="mb-3">
+                          <div id="dropzone" class="border border-secondary rounded p-4 text-center" style="cursor: pointer;">
+                            <i class="bi bi-cloud-arrow-up fs-1 text-primary"></i>
+                            <p class="mb-0">Drag & drop your file here, or <span class="text-primary text-decoration-underline">click to choose</span></p>
+                            <p id="file-name" class="text-muted mt-2" style="font-size: 0.9rem;"></p>
+                          </div>
+                          <!-- Hidden file input -->
+                          <input type="file" name="datei" id="file-input" class="form-control d-none">
+                        </div>
+                        
+                        {% if form.datei.errors %}
+                            <div class="text-danger text-center mt-2">{{ form.datei.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-upload me-2"></i> Upload & Extract
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/drag-and-drop.js' %}"></script>
+{% endblock %}

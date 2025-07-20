@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Step 3 – Edit Personal Info{% endblock %}
+
+{% block content %}
+    {% include 'stepper.html' %}
+    {% include 'stepper_step3.html' with step3_substep="step3" %}
+
+  <div class="container-fluid mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-7">
+        <h2 class="mb-4">Edit Your Personal Information</h2>
+
+        <form method="post">
+          {% csrf_token %}
+
+          <div class="border p-4 rounded shadow-sm bg-white">
+
+            <div class="mb-3">
+              <label for="first_name" class="form-label">First Name</label>
+              <input type="text" class="form-control {% if not user.first_name %}is-empty{% endif %}" id="first_name" name="first_name" value="{{ user.first_name|default:'' }}">
+            </div>
+
+            <div class="mb-3">
+              <label for="last_name" class="form-label">Last Name</label>
+              <input type="text" class="form-control {% if not user.last_name %}is-empty{% endif %}" id="last_name" name="last_name" value="{{ user.last_name|default:'' }}">
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control {% if not user.email %}is-empty{% endif %}" id="email" name="email" value="{{ user.email|default:'' }}">
+            </div>
+
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="text" class="form-control {% if not user.phone %}is-empty{% endif %}" id="phone" name="phone" value="{{ user.phone|default:'' }}">
+            </div>
+
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <input type="text" class="form-control {% if not user.address %}is-empty{% endif %}" id="address" name="address" value="{{ user.address|default:'' }}">
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary btn-lg">
+                <i class="bi bi-arrow-right-circle me-2"></i> Save & Continue
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

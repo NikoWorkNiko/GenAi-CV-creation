@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <div class="stepper d-flex justify-content-between">
+
+    <!-- Step 1 -->
+    <div class="step {% if step == 1 %}active{% elif step > 1 %}completed{% endif %}">
+      {% if step > 1 %}
+        <a href="{% url 'step1' %}" class="text-decoration-none step-link">
+          <div class="circle">1</div>
+          <div>Upload</div>
+        </a>
+      {% else %}
+        <div class="circle">1</div>
+        <div>Upload</div>
+      {% endif %}
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step {% if step == 2 %}active{% elif step > 2 %}completed{% endif %}">
+      {% if step > 2 %}
+        <a href="{% url 'step2' %}" class="text-decoration-none step-link">
+          <div class="circle">2</div>
+          <div>Job</div>
+        </a>
+      {% else %}
+        <div class="circle">2</div>
+        <div>Job</div>
+      {% endif %}
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step {% if step == 3 %}active{% elif step > 3 %}completed{% endif %}">
+      {% if step > 3 %}
+        <a href="{% url 'step3' %}" class="text-decoration-none step-link">
+          <div class="circle">3</div>
+          <div>Check</div>
+        </a>
+      {% else %}
+        <div class="circle">3</div>
+        <div>Check</div>
+      {% endif %}
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step {% if step == 4 %}active{% elif step > 4 %}completed{% endif %}">
+      {% if step > 4 %}
+        <a href="{% url 'step4' %}" class="text-decoration-none step-link">
+          <div class="circle">4</div>
+          <div>Comparison</div>
+        </a>
+      {% else %}
+        <div class="circle">4</div>
+        <div>Comparison</div>
+      {% endif %}
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step {% if step == 5 %}active{% endif %}">
+      <div class="circle">5</div>
+      <div>Done</div>
+    </div>
+
+  </div>
+</div>

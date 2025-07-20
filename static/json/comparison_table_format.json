@@ -1,0 +1,13 @@
+{
+  "comparison_table": [
+    {
+      "job_requirement": "string",
+      "matched_user_skill": "None | <Skill> (Partial) | <Skill> (Average) | <Skill> (Expert)",
+      "confidence": "Low | Medium | High",
+      "evidence_from_cv": "string/nil",
+      "explanation_llm": "string",
+      "skill_level": "string",
+      "actions": ["edit", "prompt", "add"]
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block title %}Step 3a – Engagement, Skills & Preferences{% endblock %}
+
+{% block content %}
+  {% include 'stepper.html' %}
+  {% include 'stepper_step3.html' with step3_substep="step3a_other" %}
+  <div class="container-fluid mt-4">
+    <div class="row">
+      <!-- Left side: manual editing -->
+      <div class="col-md-7">
+        <h2>Edit Engagement, Skills & Preferences</h2>
+        <form method="post">
+          {% csrf_token %}
+
+          <h4>Engagement</h4>
+          {% for g in prof.engagement %}
+            <div class="border p-3 mb-2">
+              <div class="row mb-2">
+                <label class="col-sm-4 col-form-label text-end">Organization</label>
+                <div class="col-sm-8">
+                  <input type="text" name="engagement_{{ forloop.counter0 }}_organization"
+                         class="form-control {% if not g.organization %}is-empty{% endif %}"
+                         value="{{ g.organization }}">
+                </div>
+              </div>
+              <div class="row mb-2">
+                <label class="col-sm-4 col-form-label text-end">Role</label>
+                <div class="col-sm-8">
+                  <input type="text" name="engagement_{{ forloop.counter0 }}_role"
+                         class="form-control {% if not g.role %}is-empty{% endif %}"
+                         value="{{ g.role }}">
+                </div>
+              </div>
+              <div class="row mb-2">
+                <label class="col-sm-4 col-form-label text-end">Start Date</label>
+                <div class="col-sm-8">
+                  <input type="text" name="engagement_{{ forloop.counter0 }}_start"
+                         class="form-control {% if not g.start_date %}is-empty{% endif %}"
+                         value="{{ g.start_date }}">
+                </div>
+              </div>
+              <div class="row mb-2">
+                <label class="col-sm-4 col-form-label text-end">End Date</label>
+                <div class="col-sm-8">
+                  <input type="text" name="engagement_{{ forloop.counter0 }}_end"
+                         class="form-control {% if not g.end_date %}is-empty{% endif %}"
+                         value="{{ g.end_date }}">
+                </div>
+              </div>
+              <div class="row mb-2">
+                <label class="col-sm-4 col-form-label text-end">Description</label>
+                <div class="col-sm-8">
+                  <textarea name="engagement_{{ forloop.counter0 }}_description"
+                            class="form-control {% if not g.description %}is-empty{% endif %}">{{ g.description }}</textarea>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+          <h4>Skills</h4>
+          <div class="mb-3 row">
+            <label class="col-sm-4 col-form-label text-end">Technical Skills (comma-separated)</label>
+            <div class="col-sm-8">
+              <textarea class="form-control {% if not prof.skills.technical_skills %}is-empty{% endif %}"
+                        name="technical_skills">{{ prof.skills.technical_skills|join:", " }}</textarea>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-4 col-form-label text-end">Soft Skills (comma-separated)</label>
+            <div class="col-sm-8">
+              <textarea class="form-control {% if not prof.skills.soft_skills %}is-empty{% endif %}"
+                        name="soft_skills">{{ prof.skills.soft_skills|join:", " }}</textarea>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-4 col-form-label text-end">Languages (e.g. English (fluent))</label>
+            <div class="col-sm-8">
+              <textarea class="form-control {% if not prof.skills.languages %}is-empty{% endif %}"
+                        name="languages">
+                {% for lang in prof.skills.languages %}
+                  {{ lang.language }} ({{ lang.proficiency }}){% if not forloop.last %}, {% endif %}
+                {% endfor %}
+              </textarea>
+            </div>
+          </div>
+
+          <h4>Job Preferences</h4>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="travel_required" name="travel_required"
+                   {% if prof.job_requirements.misc.travel_required %}checked{% endif %}>
+            <label class="form-check-label" for="travel_required">Travel Required</label>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" id="relocation_support" name="relocation_support"
+                   {% if prof.job_requirements.misc.relocation_support %}checked{% endif %}>
+            <label class="form-check-label" for="relocation_support">Relocation Support</label>
+          </div>
+          <div class="row mb-2">
+            <label class="col-sm-4 col-form-label text-end">Working Hours</label>
+            <div class="col-sm-8">
+              <input type="text" name="working_hours"
+                     class="form-control {% if not prof.job_requirements.misc.working_hours %}is-empty{% endif %}"
+                     value="{{ prof.job_requirements.misc.working_hours }}">
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label class="col-sm-4 col-form-label text-end">Contract Type</label>
+            <div class="col-sm-8">
+              <input type="text" name="contract_type"
+                     class="form-control {% if not prof.job_requirements.misc.contract_type %}is-empty{% endif %}"
+                     value="{{ prof.job_requirements.misc.contract_type }}">
+            </div>
+          </div>
+          <div class="row mb-2">
+            <label class="col-sm-4 col-form-label text-end">Additional Notes</label>
+            <div class="col-sm-8">
+              <textarea name="additional_notes"
+                        class="form-control {% if not prof.job_requirements.misc.additional_notes %}is-empty{% endif %}">{{ prof.job_requirements.misc.additional_notes }}</textarea>
+            </div>
+          </div>
+
+          <button type="submit" name="final_save" value="1" class="btn btn-primary mt-3">Save & Continue</button>
+        </form>
+      </div>
+
+      <!-- Right side: Gemini assistant -->
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">AI Assistant Summary</h5>
+            {% if summary %}
+              {% load markdown_deux_tags %}
+              <div class="alert alert-info">{{ summary|markdown }}</div>
+            {% endif %}
+
+            <form method="post" class="mt-3">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="instruction" class="form-label">Send a message to the AI assistant</label>
+                <textarea name="instruction" class="form-control" rows="4"
+                          placeholder="e.g., Add another language or skill"></textarea>
+              </div>
+              <button type="submit" name="send_instruction" value="1" class="btn btn-secondary">Send to AI</button>
+            </form>
+
+            {% if preview %}
+              <hr>
+              <h6>Preview of updated data:</h6>
+              <div class="alert alert-success">{{ preview|markdown }}</div>
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="apply_preview" value="1">
+                <button type="submit" class="btn btn-success">Apply These Changes</button>
+              </form>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+

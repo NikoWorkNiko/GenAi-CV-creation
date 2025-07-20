@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CV-Creator{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <!-- Hero Section -->
+    <div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+        <div class="container-fluid py-5 my-5">
+            <div class="row align-items-center">
+                <div class="col-md-7">
+                    <h1 class="display-5 fw-bold">Create Your CV with AI</h1>
+                    <p class="lead">In just a few steps, our AI will help you generate a professional CV – easy, fast, and for free.</p>
+                    <a class="btn btn-primary btn-lg mt-3" href="{% url 'step1' %}">Start Now</a>
+                </div>
+                <div class="col-md-5 d-none d-md-block">
+                    <img src="{% static 'images/start-picture.png' %}" alt="CV Illustration" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="row text-center py-5 my-5">
+        <div class="col-md-4">
+            <i class="bi bi-lightning-charge-fill fs-1 text-primary"></i>
+            <h5 class="mt-2">Fast & Easy</h5>
+            <p>No design skills needed – just answer a few questions.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="bi bi-stars fs-1 text-success"></i>
+            <h5 class="mt-2">Professional Look</h5>
+            <p>AI ensures your CV looks polished and ready to impress.</p>
+        </div>
+        <div class="col-md-4">
+            <i class="bi bi-shield-check fs-1 text-info"></i>
+            <h5 class="mt-2">Privacy First</h5>
+            <p>We don’t store your data. Everything happens in your browser.</p>
+        </div>
+    </div>
+
+    <!-- User Feedback -->
+    <div class="bg-light p-4 rounded shadow-sm mt-4">
+        <h4 class="text-center mb-4">What our users say</h4>
+        <div class="row text-center justify-content-center">
+            <div class="col-md-4 mb-4">
+                <img src="{% static 'images/user1.png' %}" class="rounded-circle mb-3" alt="Alex" width="80" height="120">
+                <blockquote class="blockquote">
+                    <p>"Super easy and the result looked great!"</p>
+                    <footer class="blockquote-footer">Alex, Student</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="{% static 'images/user2.png' %}" class="rounded-circle mb-3" alt="Jamie" width="80" height="120">
+                <blockquote class="blockquote">
+                    <p>"I had a job interview the next day – this saved me."</p>
+                    <footer class="blockquote-footer">Jamie, Job Seeker</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-4 mb-4">
+                <img src="{% static 'images/user3.png' %}" class="rounded-circle mb-3" alt="Taylor" width="80" height="120">
+                <blockquote class="blockquote">
+                    <p>"Better than most paid tools. Impressive!"</p>
+                    <footer class="blockquote-footer">Taylor, Freelancer</footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+{% endblock %}
+

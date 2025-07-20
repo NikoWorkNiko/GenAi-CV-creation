@@ -1,0 +1,108 @@
+.stepper {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+/* Basis-Stil für Kreis */
+.step .circle {
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  border-radius: 50%;
+  background-color: #dee2e6;
+  color: black;
+  margin: 0 auto 0.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Aktiver Schritt */
+.step.active .circle {
+  background-color: #0d6efd;
+  color: white;
+}
+
+/* Bereits abgeschlossener Schritt */
+.step.completed .circle {
+  background-color: #66b3ff;
+  color: white;
+}
+
+/* Nur der Kreis soll klickbar sein */
+.circle-link {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Link-Hover-Effekt auf Kreis */
+.circle-link:hover .circle {
+  background-color: #0b5ed7;
+  color: white;
+}
+
+/* Mauszeiger zeigt auf Link */
+.circle-link .circle {
+  cursor: pointer;
+}
+
+/* Text unterhalb des Kreises */
+.step-label {
+  font-size: 0.9rem;
+  color: inherit;
+}
+
+/* Sekundärer Stepper (step3): einfacher Balkenstil */
+/* Sekundärer Stepper (für Step 3) */
+.stepper-sub {
+  border-top: 1px solid #dee2e6;
+  padding-top: 0.75rem;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-sub {
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 0.25rem;
+}
+
+/* Linie optional sichtbar bei Hover oder Aktiv */
+.step-sub a {
+  color: #6c757d; /* grau für unerreicht */
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding-bottom: 0.2rem;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+}
+
+/* Aktiver Schritt */
+.step-sub.active a {
+  color: #0d6efd; /* kräftiges Blau */
+  border-bottom: 2px solid #0d6efd;
+}
+
+/* Bereits abgeschlossen */
+.step-sub.completed a {
+  color: #66b3ff; /* hellblau */
+}
+
+/* Hover-Effekt */
+.step-sub a:hover {
+  color: #0a58ca;
+}
+
+.is-empty {
+  background-color: #ffe6e6; /* Light red background */
+}

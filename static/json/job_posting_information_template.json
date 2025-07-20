@@ -1,0 +1,38 @@
+{
+  "job_posting_information": {
+    "company" : "name",
+    "required_education": [
+      {
+        "degree": "string",
+        "field_of_study": "string",
+        "minimum_level": "string",
+        "preferred_institutions": ["string/nil"]
+      }
+    ],
+    "required_work_experience": [
+      {
+        "position": "string",
+        "industry": "string",
+        "years_required": "number",
+        "responsibilities": ["string"]
+      }
+    ],
+    "required_hard_skills": [
+      {
+        "skill": "string",
+        "proficiency_level": "string",
+        "certification_required": "boolean"
+      }
+    ],
+    "job_specific_soft_skills": ["string"],
+    "misc": {
+      "contract_type": "string",
+      "working_hours": "string",
+      "travel_required": "boolean",
+      "relocation_support": "boolean",
+      "location": "string",
+      "language_requirements": ["string/nil"],
+      "additional_notes": "string/nil"
+    }
+  }
+}

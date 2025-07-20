@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load markdown_deux_tags %}
+{% block title %}Step 3a – Edit Work Experience{% endblock %}
+
+{% block content %}
+  {% include 'stepper.html' %}
+  {% include 'stepper_step3.html' with step3_substep="step3a_work" %}
+
+  <div class="container-fluid mt-4">
+    <div class="row">
+      <!-- Left side: manual editing -->
+      <div class="col-md-7">
+        <h2>Edit Your Work Experience</h2>
+        <form method="post">
+          {% csrf_token %}
+
+          <h4>Work Experience</h4>
+          {% for w in work_experience %}
+            <div class="border p-3 mb-2">
+              {% with w.institution.name as val %}
+              <div class="row mb-2">
+                <label class="col-sm-4 col-form-label text-end">Institution Name</label>
+                <div class="col-sm-8">
+                  <input type="text" name="work_{{ forloop.counter0 }}_institution_name"
+                         class="form-control {% if not val or val == 'None' %}is-empty{% endif %}"
+                         value="{% if val != 'None' %}{{ val }}{% endif %}">
+                </div>
+              </div>
+              {% endwith %}
+
+              {% with w.institution.department as val %}
+              <div class="row mb-2">
+                <label class="col-sm-4 col-form-label text-end">Department</label>
+                <div class="col-sm-8">
+                  <input type="text" name="work_{{ forloop.counter0 }}_institution_department"
+                         class="form-control {% if not val or val == 'None' %}is-empty{% endif %}"
+                         value="{% if val != 'None' %}{{ val }}{% endif %}">
+                </div>
+              </div>
+              {% endwith %}
+
+              {% with w.institution.location as val %}
+              <div class="row mb-2">
+                <label class="col-sm-4 col-form-label text-end">Location</label>
+                <div class="col-sm-8">
+                  <input type="text" name="work_{{ forloop.counter0 }}_institution_location"
+                         class="form-control {% if not val or val == 'None' %}is-empty{% endif %}"
+                         value="{% if val != 'None' %}{{ val }}{% endif %}">
+                </div>
+              </div>
+              {% endwith %}
+
+              {% with w.position.name as val %}
+              <div class="row mb-2">
+                <label class="col-sm-4 col-form-label text-end">Position</label>
+                <div class="col-sm-8">
+                  <input type="text" name="work_{{ forloop.counter0 }}_position_name"
+                         class="form-control {% if not val or val == 'None' %}is-empty{% endif %}"
+                         value="{% if val != 'None' %}{{ val }}{% endif %}">
+                </div>
+              </div>
+              {% endwith %}
+
+              {% with w.position.description as val %}
+              <div class="row mb-2">
+                <label class="col-sm-4 col-form-label text-end">Description</label>
+                <div class="col-sm-8">
+                  <textarea name="work_{{ forloop.counter0 }}_position_description"
+                            class="form-control {% if not val or val == 'None' %}is-empty{% endif %}">{% if val != 'None' %}{{ val }}{% endif %}</textarea>
+                </div>
+              </div>
+              {% endwith %}
+
+              {% with w.start_date as val %}
+              <div class="row mb-2">
+                <label class="col-sm-4 col-form-label text-end">Start Date</label>
+                <div class="col-sm-8">
+                  <input type="text" name="work_{{ forloop.counter0 }}_start"
+                         class="form-control {% if not val or val == 'None' %}is-empty{% endif %}"
+                         value="{% if val != 'None' %}{{ val }}{% endif %}">
+                </div>
+              </div>
+              {% endwith %}
+
+              {% with w.end_date as val %}
+              <div class="row mb-2">
+                <label class="col-sm-4 col-form-label text-end">End Date</label>
+                <div class="col-sm-8">
+                  <input type="text" name="work_{{ forloop.counter0 }}_end"
+                         class="form-control {% if not val or val == 'None' %}is-empty{% endif %}"
+                         value="{% if val != 'None' %}{{ val }}{% endif %}">
+                </div>
+              </div>
+              {% endwith %}
+            </div>
+          {% endfor %}
+
+          <button type="submit" name="final_save" class="btn btn-primary">Save & Continue</button>
+        </form>
+      </div>
+
+      <!-- Right side: Gemini assistant -->
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">AI Assistant Summary</h5>
+            {% if summary %}
+              <div class="alert alert-info">{{ summary|markdown }}</div>
+            {% endif %}
+
+            <form method="post" class="mt-3">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="instruction" class="form-label">Send a message to the AI assistant</label>
+                <textarea name="instruction" class="form-control" rows="4" placeholder="e.g., Add experience as a project manager in AI"></textarea>
+              </div>
+              <button type="submit" name="send_instruction" value="1" class="btn btn-secondary">Send to AI</button>
+            </form>
+
+            {% if preview %}
+              <hr>
+              <h6>Preview of updated data:</h6>
+              <div class="alert alert-success">{{ preview|markdown }}</div>
+              <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="apply_preview" value="1">
+                <button type="submit" class="btn btn-success">Apply These Changes</button>
+              </form>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

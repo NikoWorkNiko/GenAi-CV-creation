@@ -1,0 +1,13 @@
+{
+  "company_values_information": {
+    "job_specific_values": [
+      "string"
+    ],
+    "company_specific_values": [
+      "string"
+    ],
+    "desired_character_traits": [
+      "string"
+    ]
+  }
+}

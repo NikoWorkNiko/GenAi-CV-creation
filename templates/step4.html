@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% block title %}CV-Creator - Step 4{% endblock %}
+
+{% block content %}
+    {% include 'stepper.html' %}
+
+    <div class="mb-3 text-end">
+        <form action="{% url 'rerun_comparison' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning">🔁 Re-run Comparison</button>
+        </form>
+    </div>
+
+    {% if match_percentage is not none %}
+        <div class="alert alert-success">
+            <strong>Match Percentage:</strong> {{ match_percentage }} %
+        </div>
+    {% endif %}
+
+    {% if comparison_table %}
+        <form method="post" action="{% url 'save_comparison_edits' %}">
+            {% csrf_token %}
+            <h4>Comparison Table</h4>
+            <table class="table table-bordered">
+                <colgroup>
+                    <col style="width: 20%;">
+                    <col style="width: 20%;"> <!-- Wider Matched Skill column -->
+                    <col style="width: 10%;">
+                    <col style="width: 50%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Requirement</th>
+                        <th>Matched Skill</th>
+                        <th>Confidence</th>
+                        <th>Explanation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in comparison_table %}
+                    <tr>
+                        <td>
+                            {{ row.job_requirement }}
+                            <input type="hidden" name="job_req_{{ forloop.counter0 }}" value="{{ row.job_requirement }}">
+                        </td>
+                        <td>
+                            <textarea
+                                name="matched_skill_{{ forloop.counter0 }}"
+                                class="form-control autosize"
+                                oninput="autoResize(this); autoSave({{ forloop.counter0 }});"
+                                rows="1"
+                                style="min-height: 32px; resize: none; overflow: hidden;"
+                                oninput="autoResize(this)"
+                            >{{ row.matched_user_skill }}</textarea>
+                        </td>
+                        <td>{{ row.confidence }}</td>
+                        <td>
+                            <div id="explanation-{{ forloop.counter0 }}">
+                                {{ row.explanation_llm|linebreaksbr }}
+                            </div>
+
+                            {% if row.matched_user_skill == "None" and "likely" in row.explanation_llm %}
+                                <div class="mt-2" id="actions-{{ forloop.counter0 }}">
+                                    <strong>⚠️ Likely related skill inferred.</strong><br>
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-success"
+                                        onclick="addSuggestedSkill('{{ row.job_requirement|escapejs }}', {{ forloop.counter0 }})"
+                                    >
+                                        ✅ Add suggested skill
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-sm btn-outline-secondary ms-1"
+                                        onclick="ignoreSuggestedSkill('{{ row.job_requirement|escapejs }}', {{ forloop.counter0 }})"
+                                    >
+                                        ❌ Ignore
+                                    </button>
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <input type="hidden" name="total_rows" value="{{ comparison_table|length }}">
+
+            <div class="text-end mt-4">
+                <button type="submit" class="btn btn-primary">See preview of CV</button>
+            </div>
+        </form>
+    {% endif %}
+
+    <!-- JS: Auto-resize textarea -->
+    <script>
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = (textarea.scrollHeight) + 'px';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.autosize').forEach(autoResize);
+        });
+
+        function getCSRFToken() {
+            const cookie = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
+            return cookie ? cookie.split('=')[1] : '';
+        }
+
+        function addSuggestedSkill(jobReq, index) {
+            fetch("{% url 'add_suggested_skill' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCSRFToken(),
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({ job_requirement: jobReq }),
+            }).then(response => {
+                if (response.ok) {
+                    const skillTextarea = document.querySelector(`[name="matched_skill_${index}"]`);
+                    if (skillTextarea) {
+                        skillTextarea.value = `${jobReq} (Partial)`;
+                        autoResize(skillTextarea);
+                    }
+                    const explanation = document.getElementById(`explanation-${index}`);
+                    explanation.innerHTML += "<br>✅ Based on your profile, we assumed you likely know this skill.";
+
+                    const actionDiv = document.getElementById(`actions-${index}`);
+                    actionDiv.innerHTML = "<em>You chose to add the suggested skill.</em>";
+                }
+            });
+        }
+
+        function ignoreSuggestedSkill(jobReq, index) {
+            fetch("{% url 'ignore_suggested_skill' %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCSRFToken(),
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({ job_requirement: jobReq }),
+            }).then(response => {
+                if (response.ok) {
+                    const explanation = document.getElementById(`explanation-${index}`);
+                    explanation.innerHTML += "";
+
+                    const actionDiv = document.getElementById(`actions-${index}`);
+                    actionDiv.innerHTML = "<em>You chose to ignore the suggestion.</em>";
+                }
+            });
+        }
+        
+        function getCSRFToken() {
+    const cookie = document.cookie.split('; ').find(row => row.startsWith('csrftoken='));
+    return cookie ? cookie.split('=')[1] : '';
+}
+
+function autoSave(index) {
+    const skillField = document.querySelector(`[name="matched_skill_${index}"]`);
+    const jobReqField = document.querySelector(`[name="job_req_${index}"]`);
+    if (!skillField || !jobReqField) return;
+
+    const data = new URLSearchParams({
+        job_requirement: jobReqField.value,
+        matched_skill: skillField.value
+    });
+
+    fetch("{% url 'autosave_skill_edit' %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": getCSRFToken(),
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: data,
+    }).then(response => {
+        if (!response.ok) {
+            console.warn("Autosave failed.");
+        }
+    });
+}
+    </script>
+{% endblock %}

@@ -1,0 +1,229 @@
+{
+  "professional_info": {
+    "education": [
+      {
+        "institution": "",
+        "degree": "",
+        "field_of_study": "",
+        "start_date": "",
+        "end_date": null,
+        "grade": null,
+        "description": null
+      },
+      {
+        "institution": "",
+        "degree": "",
+        "field_of_study": "",
+        "start_date": "",
+        "end_date": null,
+        "grade": "1.2",
+        "description": ""
+      },
+      {
+        "institution": "",
+        "degree": "",
+        "field_of_study": "",
+        "start_date": "",
+        "end_date": "",
+        "grade": "",
+        "description": ""
+      },
+      {
+        "institution": "",
+        "degree": "",
+        "field_of_study": null,
+        "start_date": "",
+        "end_date": "",
+        "grade": "",
+        "description": ""
+      }
+    ],
+    "work_experience": [
+      {
+        "institution": {
+          "name": "",
+          "department": "",
+          "location": ""
+        },
+        "position": {
+          "name": "",
+          "description": ""
+        },
+        "start_date": "",
+        "end_date": null,
+        "projects": [],
+        "achievements": []
+      },
+      {
+        "institution": {
+          "name": "",
+          "department": null,
+          "location": null
+        },
+        "position": {
+          "name": "",
+          "description": ""
+        },
+        "start_date": "",
+        "end_date": "",
+        "projects": [],
+        "achievements": []
+      },
+      {
+        "institution": {
+          "name": null,
+          "department": null,
+          "location": null
+        },
+        "position": {
+          "name": "",
+          "description": ""
+        },
+        "start_date": "",
+        "end_date": "",
+        "projects": [],
+        "achievements": []
+      },
+      {
+        "institution": {
+          "name": "",
+          "department": null,
+          "location": ""
+        },
+        "position": {
+          "name": "",
+          "description": ""
+        },
+        "start_date": "",
+        "end_date": null,
+        "projects": [],
+        "achievements": []
+      },
+      {
+        "institution": {
+          "name": "",
+          "department": "",
+          "location": ""
+        },
+        "position": {
+          "name": "",
+          "description": ""
+        },
+        "start_date": "",
+        "end_date": null,
+        "projects": [],
+        "achievements": []
+      },
+      {
+        "institution": {
+          "name": "",
+          "department": null,
+          "location": ""
+        },
+        "position": {
+          "name": "",
+          "description": ""
+        },
+        "start_date": "",
+        "end_date": null,
+        "projects": [],
+        "achievements": []
+      }
+    ],
+    "engagement": [
+      {
+        "organization": "",
+        "role": "",
+        "start_date": "",
+        "end_date": null,
+        "description": ""
+      },
+      {
+        "organization": "",
+        "role": "Ry",
+        "start_date": "",
+        "end_date": null,
+        "description": ""
+      },
+      {
+        "organization": "",
+        "role": "",
+        "start_date": "",
+        "end_date": null,
+        "description": ""
+      }
+    ],
+    "skills": {
+      "technical_skills": [],
+      "soft_skills": [],
+      "languages": [
+        {
+          "language": "",
+          "proficiency": ""
+        },
+        {
+          "language": "",
+          "proficiency": ""
+        }
+      ]
+    },
+    "awards": [
+      {
+        "title": "",
+        "issuer": "",
+        "date": "",
+        "description": ""
+      },
+      {
+        "title": "",
+        "issuer": "",
+        "date": "",
+        "description": ""
+      },
+      {
+        "title": "",
+        "issuer": "",
+        "date": "",
+        "description": "A"
+      },
+      {
+        "title": "e",
+        "issuer": "",
+        "date": "",
+        "description": ""
+      },
+      {
+        "title": "",
+        "issuer": "",
+        "date": "",
+        "description": "
+      },
+      {
+        "title": "",
+        "issuer": "",
+        "date": "",
+        "description": ""
+      }
+    ],
+    "job_requirements": {
+      "required_education": [],
+      "required_work_experience": [],
+      "required_hard_skills": [],
+      "job_specific_values_soft_skills": {
+        "soft_skills": [],
+        "job_values": []
+      },
+      "company_specific_values_character_values": {
+        "core_company_values": [],
+        "desired_character_traits": []
+      },
+      "misc": {
+        "travel_required": null,
+        "relocation_support": null,
+        "working_hours": null,
+        "contract_type": null,
+        "additional_notes": null
+      }
+    }
+  }
+}

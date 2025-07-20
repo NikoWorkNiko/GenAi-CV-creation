@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CV-Creator – Step 2b: Company Values{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+
+        {% include 'stepper.html' %}
+
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Step 2b: Company Values</h2>
+                <p class="text-center text-muted">
+                    Paste the <strong>URL</strong> of the company's career page or values page. Our AI will extract cultural values, character traits and expectations from it.
+                </p>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <!-- Company Values URL input -->
+                    <div class="mb-4">
+                        <label for="id_job_url" class="form-label">
+                            <i class="bi bi-link-45deg text-primary me-1"></i>
+                            Paste URL for Company Values (optional)
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light text-muted">
+                                <i class="bi bi-globe"></i>
+                            </span>
+                            <input type="url" class="form-control" id="job_url" name="job_url" placeholder="https://www.example.com/values">
+                        </div>
+
+                        {% if form.job_url.errors %}
+                            <div class="text-danger mt-1">{{ form.job_url.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="bi bi-arrow-right-circle me-2"></i> Continue
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
